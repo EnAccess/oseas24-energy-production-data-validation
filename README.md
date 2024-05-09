@@ -100,4 +100,34 @@ Grid power and generator power have distinct patterns, which are dependent on ma
 - Generator: model, size, and maintenance state
 - Grid Power: number of facilities serviced by the grid, total power of the grid energy source, distance between the facility and the power source (ie. resistance built up in the cable)
 
-More details soon …
+The **power** measures the amount of energy pulled from all devices in the clinic at any particular time.  In general, the power is not affected by the energy source - it’s only affected by which devices are running and how much energy they need. 
+
+However, **changes in power can result in changes to the frequency and voltage**.  The effect that the power has on F and/or V is dependent on the capacity of the generator/grid.  If the generator/grid stores quite a lot of energy relative to what’s pulled by the clinic, then power use won’t have a huge affect.  However, if the power needed starts to strain a small generator or overstretched grid, the F and/or V could decrease significantly when power use is high.  
+
+Here is an example of a case (KOI) where we have both bulk metering and generator:
+
+![](jpg/01_meter_koi_blank.jpg)
+
+You can see that there are clear periods where the frequency is constant, vs periods where it’s highly varying.  In this case, because we also have a separate meter on the generator we can see which periods are generator and which are grid.  
+
+![](jpg/01_meter_koi_arrows.jpeg)
+
+The periods with highly varying frequency are when the generator is on.  Periods with grid power have constant frequency.  This pattern won’t hold for every clinic, though.  It’s highly dependent on the specific generator and the specific grid.
+
+Here is another example of a clinic (MAG) with two clear different period types:
+
+![](jpg/02_meters_mag_flat_freq.jpg)
+
+In this case, we don’t know which is from generator and which is from grid, but we can at least distinguish between the two types.
+
+So some things to consider:
+- The pattern will be different for each clinic.
+- Not only the magnitude of the P, V, and F are important.  Also, you might want to consider the relationship between them.
+- Grid power will be more likely to vary in predictable ways over the course of the day, depending on energy use of other households (ex. V/F decreasing in the evening hours due to increase electricity usage)
+- Grid power is often more variable and less reliable the further the clinic is from an urban hub. 
+
+
+### What we’re looking for
+Because each clinic has a different pattern, we’re less interested in the model for an individual clinic, and more interested in the types of features that you can engineer that have power to distinguish between generator/grid clusters across different models for each clinic.
+
+We would like to work with the clinics to track their power outages over time so we can properly label the data for training, but with the exception of a few clinics in the dataset (ex. KOI) the data aren’t currently labeled.  But being able to see which features help differentiate time periods with different patterns will help us in going back and visually inspecting the graphs to better understand those patterns.  Anything you find will be very interesting to us!
